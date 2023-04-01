@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
 import {currentCarData} from '../utils/firebase.js'
 import { AppBar,Toolbar, Typography, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -8,9 +6,6 @@ import { Link } from 'react-router-dom'
 
 function InputFile() {
 
-  useEffect(() => {
-    currentCarData();
-  }, []);
 
   return (
     <div className="App">

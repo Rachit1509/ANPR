@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, query, getDocs,onSnapshot,doc, setDoc,getDoc,getFirestore,serverTimestamp } from "firebase/firestore";
+import { collection, query, getDocs,onSnapshot,doc, setDoc,getDoc,getFirestore,serverTimestamp,deleteDoc,where} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,6 +39,33 @@ const pastCarData = async () => {
   });
 };
 
+const handleMoveData = async (documentId) => {
+  console.log(documentId);
+  const sourceCollectionRef = collection(db, 'car_data');
+
+  const q = query(sourceCollectionRef, where('id', '==', documentId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+      const docu = querySnapshot.docs[0];
+      await setDoc(doc(db, 'past_car_data',docu.id), docu.data());
+      await deleteDoc(doc(db, 'car_data', docu.id));
+  }
+};
+
+const deleteCompletedData = async (documentId) => {
+  console.log(documentId);
+  const sourceCollectionRef = collection(db, 'past_car_data');
+
+  const q = query(sourceCollectionRef, where('id', '==', documentId));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+      const docu = querySnapshot.docs[0];
+      await deleteDoc(doc(db, 'past_car_data', docu.id));
+  }
+};
 
 
-export {currentCarData,pastCarData}
+
+export {deleteCompletedData,handleMoveData,currentCarData,pastCarData,collection,query,getDocs,onSnapshot,doc,setDoc,getDoc,getFirestore,serverTimestamp,db,event,deleteDoc,where}

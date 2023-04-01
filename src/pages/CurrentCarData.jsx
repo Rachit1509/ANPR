@@ -1,27 +1,34 @@
 import { useEffect, useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
-import {currentCarData} from '../utils/firebase.js'
 import { Link } from 'react-router-dom'
 import { AppBar,Typography,Box, Toolbar,Button, Paper} from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
-import  currentCarDataFile  from '../utils/current-car-data.jsx'
+import { collection,query,db,handleMoveData,onSnapshot } from "../utils/firebase.js";
 
 
 const columns = [
-  { field: 'id', headerName: 'S No.', width: 50 },
-  { field: 'carNo', headerName: 'Car No', width: 120 },
-  { field: 'createdDate', headerName: 'Created Date', width: 110 },
-  { field: 'PUCValidity', headerName: 'PUC Validity', width: 160 },
-  { field: 'TaxValidity', headerName: 'Tax Validity', width: 160 },
-  { field: 'InsuranceValidity', headerName: 'Insurance Validty', width: 160 },
-  { field: 'Completed', headerName: 'Completed', width: 100 },
+  { field: 'id', headerName: 'Car No', width: 120 },
+  { field: 'created_date', headerName: 'Created Date', width: 110 },
+  { field: 'puc_validity', headerName: 'PUC Validity', width: 160 },
+  { field: 'tax_validity', headerName: 'Tax Validity', width: 160 },
+  { field: 'insurance_validity', headerName: 'Insurance Validty', width: 160 },
+  { field: 'Completed', headerName: 'Completed', width: 100, renderCell: (params) => (
+    <button onClick={() => handleMoveData(params.row.id)}>Completed</button>
+  )},
 ];
 
 function CurrentCarData() {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    currentCarData();
+    const q = query(collection(db, "car_data"));
+    const unsubscribe = onSnapshot(q,(querySnapshot) => {
+        const docs = [];
+        querySnapshot.forEach((doc) => {
+          docs.push({ id: doc.id, ...doc.data() });
+        });
+        setData(docs);
+      });
+    return unsubscribe;
   }, []);
 
   return (
@@ -35,12 +42,12 @@ function CurrentCarData() {
             <Button color="inherit"><Link to="/input-file" style={{ textDecoration: 'none', color: 'inherit' }}>Input File</Link></Button>
           </Toolbar>
         </AppBar>
-        <Paper elevation={3} className="survey-card" >
-          <Box sx={{ marginTop: "7.5%" }}>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Current Car Data</Typography>
+        <Paper elevation={3} className="survey-card" sx={{margin:'7.5%',marginTop:'80px', padding:'2%' }}>
+          <Box>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>Current Car Data</Typography>
             <DataGrid
               autoHeight 
-              rows={currentCarDataFile}
+              rows={data}
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[10]}
