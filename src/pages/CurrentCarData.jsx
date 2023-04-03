@@ -20,7 +20,7 @@ function CurrentCarData() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "car_data"));
+    const q = query(collection(db, "current_car_data"));
     const unsubscribe = onSnapshot(q,(querySnapshot) => {
         const docs = [];
         querySnapshot.forEach((doc) => {
