@@ -7,7 +7,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import CurrentCarData from './pages/CurrentCarData.jsx'
+import AllCarData from './pages/AllCarData.jsx'
 import InputFile from './pages/InputFile.jsx'
 import PastCarData from './pages/PastCarData.jsx'
 import InvalidCarData from './pages/InvalidCarData.jsx'
@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>    
           <Route
             path="/"
-            element={<CurrentCarData />}
+            element={<AllCarData />}
           />
           <Route
             path="/past-car-data"

@@ -3,17 +3,41 @@ import { Link } from 'react-router-dom'
 import { AppBar,Typography,Box, Toolbar,Button, Paper} from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
 import { collection,query,db,handleMoveData,onSnapshot } from "../utils/firebase.js";
+import moment from 'moment';
 
+const getCellColor = (params) => {
+  console.log(params.value);
+  const dateString = params.value;
+  var jsDate = moment(dateString, "DD-MMM-YYYY").toDate();
+  var now = new Date();
+  if (jsDate < now) {
+    return '#f44336'; // red
+  }
+  console.log(jsDate);
+};
 
 const columns = [
   { field: 'id', headerName: 'Car No', width: 120 },
-  { field: 'created_date', headerName: 'Created Date', width: 110 },
-  { field: 'puc_validity', headerName: 'PUC Validity', width: 160 },
-  { field: 'tax_validity', headerName: 'Tax Validity', width: 160 },
-  { field: 'insurance_validity', headerName: 'Insurance Validty', width: 160 },
-  { field: 'Completed', headerName: 'Completed', width: 100, renderCell: (params) => (
-    <button onClick={() => handleMoveData(params.row.id)}>Completed</button>
+  { field: 'Completed', headerName: 'Done', width: 50, renderCell: (params) => (
+    <button onClick={() => handleMoveData(params.row.id)}>✔</button>
   )},
+  { field: 'created_date', headerName: 'Created Date', width: 110},
+  { field: 'puc_validity', headerName: 'PUC Validity', width: 160, renderCell: (params) => (
+    <div style={{ backgroundColor: getCellColor(params) }}>
+      {params.value}
+    </div>
+  ),  },
+  { field: 'tax_validity', headerName: 'Tax Validity', width: 160, renderCell: (params) => (
+    <div style={{ backgroundColor: getCellColor(params) }}>
+      {params.value}
+    </div>
+  ),  },
+  { field: 'insurance_validity', headerName: 'Insurance Validty', width: 160, renderCell: (params) => (
+    <div style={{ backgroundColor: getCellColor(params) }}>
+      {params.value}
+    </div>
+  ),  },
+  
 ];
 
 function InvalidCarData() {

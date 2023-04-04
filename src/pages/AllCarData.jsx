@@ -2,21 +2,33 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AppBar,Typography,Box, Toolbar,Button, Paper} from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
-import { collection,query,db,handleMoveData,onSnapshot } from "../utils/firebase.js";
+import { collection,query,db,onSnapshot } from "../utils/firebase.js";
 
+const getCellColor = (params) => {
+  console.log(params.row.validity);
+  const age = params.row.validity;
+  if (params.row.validity == 'false') {
+    return '#f44336'; // red
+  }
+};
 
 const columns = [
-  { field: 'id', headerName: 'Car No', width: 120 },
+  { field: 'id', headerName: 'Car No', width: 120, renderCell: (params) => (
+    <div style={{ backgroundColor: getCellColor(params) }}>
+      {params.value}
+    </div>
+  ), },
   { field: 'created_date', headerName: 'Created Date', width: 110 },
   { field: 'puc_validity', headerName: 'PUC Validity', width: 160 },
   { field: 'tax_validity', headerName: 'Tax Validity', width: 160 },
   { field: 'insurance_validity', headerName: 'Insurance Validty', width: 160 },
-  { field: 'Completed', headerName: 'Completed', width: 100, renderCell: (params) => (
-    <button onClick={() => handleMoveData(params.row.id)}>Completed</button>
-  )},
+  { field: 'validity', headerName: 'Validity', width: 10 }
+  // { field: 'Completed', headerName: 'Completed', width: 100, renderCell: (params) => (
+  //   <button onClick={() => handleMoveData(params.row.id)}>Completed</button>
+  // )},
 ];
 
-function CurrentCarData() {
+function AllCarData() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -60,4 +72,4 @@ function CurrentCarData() {
   )
 }
 
-export default CurrentCarData;
+export default AllCarData;
