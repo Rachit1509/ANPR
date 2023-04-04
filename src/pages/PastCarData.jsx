@@ -16,7 +16,7 @@ const columns = [
   )},
 ];
 
-function CurrentCarData() {
+function PastCarData() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ function CurrentCarData() {
                 ANPR
             </Typography>
             <Button color="inherit"><Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Current Car Data</Link></Button>
+            <Button color="inherit"><Link to="/invalid-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Invalid Data</Link></Button>
             <Button color="inherit"><Link to="/input-file" style={{ textDecoration: 'none', color: 'inherit' }}>Input File</Link></Button>
           </Toolbar>
         </AppBar>
@@ -59,4 +60,4 @@ function CurrentCarData() {
   )
 }
 
-export default CurrentCarData;
+export default PastCarData;

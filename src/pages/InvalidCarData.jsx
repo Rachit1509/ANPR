@@ -16,11 +16,11 @@ const columns = [
   )},
 ];
 
-function CurrentCarData() {
+function InvalidCarData() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "current_car_data"));
+    const q = query(collection(db, "invalid_car_data"));
     const unsubscribe = onSnapshot(q,(querySnapshot) => {
         const docs = [];
         querySnapshot.forEach((doc) => {
@@ -38,14 +38,14 @@ function CurrentCarData() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 ANPR
             </Typography>
+            <Button color="inherit"><Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Current Car Data</Link></Button>
             <Button color="inherit"><Link to="/past-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Completed Data</Link></Button>
-            <Button color="inherit"><Link to="/invalid-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Invalid Data</Link></Button>
             <Button color="inherit"><Link to="/input-file" style={{ textDecoration: 'none', color: 'inherit' }}>Input File</Link></Button>
           </Toolbar>
         </AppBar>
         <Paper elevation={3} className="survey-card" sx={{margin:'7.5%',marginTop:'80px', padding:'2%' }}>
           <Box>
-            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>Current Car Data</Typography>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>Invalid Car Data</Typography>
             <DataGrid
               autoHeight 
               rows={data}
@@ -60,4 +60,4 @@ function CurrentCarData() {
   )
 }
 
-export default CurrentCarData;
+export default InvalidCarData;

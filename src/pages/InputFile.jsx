@@ -15,6 +15,7 @@ function InputFile() {
               ANPR
           </Typography>
           <Button color="inherit"><Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Current Data</Link></Button>
+          <Button color="inherit"><Link to="/invalid-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Invalid Data</Link></Button>
           <Button color="inherit"><Link to="/past-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Completed File</Link></Button>
         </Toolbar>
       </AppBar>

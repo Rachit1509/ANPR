@@ -39,9 +39,10 @@ const pastCarData = async () => {
   });
 };
 
+
 const handleMoveData = async (documentId) => {
   console.log(documentId);
-  const sourceCollectionRef = collection(db, 'current_car_data');
+  const sourceCollectionRef = collection(db, 'invalid_car_data');
 
   const q = query(sourceCollectionRef, where('id', '==', documentId));
   const querySnapshot = await getDocs(q);
@@ -49,7 +50,7 @@ const handleMoveData = async (documentId) => {
   if (!querySnapshot.empty) {
       const docu = querySnapshot.docs[0];
       await setDoc(doc(db, 'past_car_data',docu.id), docu.data());
-      await deleteDoc(doc(db, 'current_car_data', docu.id));
+      await deleteDoc(doc(db, 'invalid_car_data', docu.id));
   }
 };
 
