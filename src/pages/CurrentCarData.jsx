@@ -40,12 +40,12 @@ function CurrentCarData() {
             </Typography>
             <Button color="inherit"><Link to="/past-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Completed Data</Link></Button>
             <Button color="inherit"><Link to="/invalid-car-data" style={{ textDecoration: 'none', color: 'inherit' }}>Invalid Data</Link></Button>
-            <Button color="inherit"><Link to="/input-file" style={{ textDecoration: 'none', color: 'inherit' }}>Input File</Link></Button>
+            {/* <Button color="inherit"><Link to="/input-file" style={{ textDecoration: 'none', color: 'inherit' }}>Input File</Link></Button> */}
           </Toolbar>
         </AppBar>
         <Paper elevation={3} className="survey-card" sx={{margin:'7.5%',marginTop:'80px', padding:'2%' }}>
           <Box>
-            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>Current Car Data</Typography>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>All Car Data</Typography>
             <DataGrid
               autoHeight 
               rows={data}
