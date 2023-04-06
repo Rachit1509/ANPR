@@ -5,10 +5,9 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import AllCarData from './pages/AllCarData.jsx'
-import InputFile from './pages/InputFile.jsx'
+// import InputFile from './pages/InputFile.jsx'
 import PastCarData from './pages/PastCarData.jsx'
 import InvalidCarData from './pages/InvalidCarData.jsx'
 

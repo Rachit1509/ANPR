@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AppBar,Typography,Box, Toolbar,Button, Paper} from '@mui/material'
+import { AppBar, Typography, Box, Toolbar, Button, Paper } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
-import { collection,query,db,onSnapshot } from "../utils/firebase.js";
+import { collection, query, db, onSnapshot } from "../utils/firebase.js";
 
 const getCellColor = (params) => {
   console.log(params.row.validity);

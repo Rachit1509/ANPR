@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, query, getDocs,onSnapshot,doc, setDoc,getDoc,getFirestore,serverTimestamp,deleteDoc,where} from "firebase/firestore";
+import { collection, query, getDocs, onSnapshot, doc, setDoc, getFirestore, deleteDoc, where} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,7 +17,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const event = "car_data";
 
 const current_car_data = query(collection(db, "car_data"));
 const currentCarData = async () => {
@@ -69,4 +68,4 @@ const deleteCompletedData = async (documentId) => {
 
 
 
-export {deleteCompletedData,handleMoveData,currentCarData,pastCarData,collection,query,getDocs,onSnapshot,doc,setDoc,getDoc,getFirestore,serverTimestamp,db,event,deleteDoc,where}
+export {deleteCompletedData,handleMoveData,currentCarData,pastCarData,collection,query,onSnapshot,db}
