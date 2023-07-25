@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+engine/SeviceAccount.json
+engine/weights/model.weights
