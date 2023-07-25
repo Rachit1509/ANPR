@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 engine/SeviceAccount.json
+engine/weights/model.weights
